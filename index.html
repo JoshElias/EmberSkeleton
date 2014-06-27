@@ -10,47 +10,35 @@
       </div>
     </script>
 
-    <script type="text/x-handlebars" data-template-name="games">
+    <script type="text/x-handlebars" data-template-name="entityList">
       {{#each}}
-        {{#link-to 'game' this}}
-          <li>{{name}}</li>
+        {{#link-to controller.type this}}
+        <li>{{name}}</li>
         {{/link-to}}
       {{/each}}
       <div>
         {{outlet}}      
-        {{filter-options filterOptions=filterOptions selected=selectedFilters}}
-        {{sort-options sortOptions=sortOptions selected=selectedSorts}}
+        {{select-option-list name="Filter Options" options=filterOptions selected=selectedFilters}}
+        {{select-option-list name="Sort Options" options=sortOptions selected=selectedSorts}}
       </div>
-
     </script>
 
-    <script type="text/x-handlebars" data-template-name="game">
+    <script type="text/x-handlebars" data-template-name="entity">
       <h1>{{name}}</h1>
       <h2>{{description}}</h2>
     </script>
 
-    <script type="text/x-handlebars" id="components/filter-options">
-      <h2>{{input type="checkbox" checked=hasSelectAll}} Filter Options</h2>
-      {{#each filterOptions}}
-        {{filter-option name=name optionID=id PA_toggleSelected="toggleSelected"}}
+
+    <script type="text/x-handlebars" id="components/select-option">
+      <label>{{input type="checkbox" checked=isSelected}} {{name}}</label>
+    </script>
+
+    <script type="text/x-handlebars" id="components/select-option-list">
+      <h2>{{input type="checkbox" checked=hasSelectAll}} {{name}}</h2>
+      {{#each options}}
+        {{select-option name=name optionID=id PA_toggleSelected="toggleSelected"}}
       {{/each}}
     </script>
-
-    <script type="text/x-handlebars" id="components/filter-option">
-      <label>{{input type="checkbox" checked=isSelected}}{{name}}</label>
-    </script>
-
-    <script type="text/x-handlebars" id="components/sort-options">
-      <h2>{{input type="checkbox" checked=hasSelectAll}} Sort Options</h2>
-      {{#each sortOptions}}
-        {{sort-option name=name optionID=id PA_toggleSelected="toggleSelected"}}
-      {{/each}}
-    </script>
-
-    <script type="text/x-handlebars" id="components/sort-option">
-      <label>{{input type="checkbox" checked=isSelected}}{{name}}</label>
-    </script>
-
 
     <!-- JAVASCRIPT --> 
     <script src="js/libs/jquery-1.10.2.min.js"></script>
